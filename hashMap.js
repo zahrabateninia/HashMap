@@ -3,11 +3,11 @@ class HashMap{
     constructor(){
         // Hold the key-value pairs in a bucket
         this.bucket = [];
-        // Set the initial size for hash table
+        // Set the initial size of hash table
         this.size = 16;
     }    
     // hash function : it takes a key and produces a hash code
-    hash(key, size) {
+    hash(key, size = this.size) {
         let hashCode = 0;
         const primeNumber = 31;
         
@@ -18,6 +18,13 @@ class HashMap{
         
         return hashCode;
 }
-
+    // set method: it stores a key-value pair in the hashmap 
+    set(key, value){
+         const index = this.hash(key)
+        // check if the key at the index already exists
+        if(!this.bucket[index]){
+            this.bucket[index] = []; // if not, create a new bucket 
+        }
+    }
      
 }
