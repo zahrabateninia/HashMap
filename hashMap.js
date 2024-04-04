@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 class HashMap{
-    constructor(){
+    //  We have a bucket array with an initial size of 16. Each index in this array represents a bucket.
+    // When storing a key-value pair, we determine the index (or bucket) using the hash function.
+    // Within that bucket, we store multiple key-value pairs directly, typically using objects or tuples.
+    // We don't create a separate dictionary for each pair; instead, we store them directly in the bucket array.
+        constructor(){
         // Hold the key-value pairs in a bucket
         this.bucket = [];
         // Set the initial size of hash table
@@ -18,13 +22,32 @@ class HashMap{
         
         return hashCode;
 }
-    // set method: it stores a key-value pair in the hashmap 
-    set(key, value){
-         const index = this.hash(key)
-        // check if the key at the index already exists
-        if(!this.bucket[index]){
-            this.bucket[index] = []; // if not, create a new bucket 
+
+    // set method: it stores a key-value pair in the hash map
+    set(key, value) {
+        const index = this.hash(key); 
+        
+        // Check if the bucket at the index already exists
+        let currentBucket = this.bucket[index]; 
+        
+        if (!currentBucket) {
+            // If not, create a new bucket
+            currentBucket = [];
+            this.bucket[index] = currentBucket;
         }
+
+        // Iterate through the current bucket to check if the key already exists
+        for (let i = 0; i < currentBucket.length; i++) {
+            // If the key already exists, update its value
+            if (currentBucket[i].key === key) {
+                currentBucket[i].value = value; // the old value will be overwritten  
+                return; 
+            }
+        }
+
+        // If the key doesn't exist, push a new key-value pair to the bucket
+        currentBucket.push({ key, value });
     }
-     
+
+    
 }
