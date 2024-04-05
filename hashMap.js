@@ -6,7 +6,7 @@ class HashMap{
     // We don't create a separate dictionary for each pair; instead, we store them directly in the bucket array.
         constructor(initializeSize = 16){
         // Hold the key-value pairs in a bucket
-        this.bucket = [];
+        this.bucket = new Array(initializeSize).fill(null).map(() => []);  
         // Set the initial size of hash table
         this.size = initializeSize;
         this.countOfPairs = 0;
@@ -58,6 +58,17 @@ class HashMap{
     }
 
     resize(){
+        let newSize = this.size*2;
+        let newBucket = new Array(newSize).fill(null).map(()=>[]);
+        // Rehash all the key-value pairs into the newBucket
+        for(const innerBucket of this.bucket){
+            for(const {key, value} of innerBucket){
+                const newIndex = this.hash(key, newSize)
+                newBucket[newIndex].push({key, value});
+            }
+        }
+        this.bucket = newBucket;
+        this.size = newSize;
 
     }
 
