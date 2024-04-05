@@ -56,7 +56,7 @@ class HashMap{
             this.resize();
         }
     }
-
+    // Note: collision is when TWO DIFFERENT keys sit inside the same bucket, because they generate the same hash code 
     resize(){
         let newSize = this.size*2;
         let newBucket = new Array(newSize).fill(null).map(()=>[]);
@@ -72,6 +72,16 @@ class HashMap{
 
     }
 
-    // Note: collision is when TWO DIFFERENT keys sit inside the same bucket, because they generate the same hash code 
-    // (e.g. Carlos and Carla are both hashed to 3, so 3 becomes a location for Carlos AND Carla. 
+    // get(key) takes one argument as a key and returns the value that is assigned to this key. If a key is not found, return null.
+    get(checkKey){
+        for(const innerBucket of this.bucket){
+            for(const {key, value} of innerBucket){
+                if(checkKey === key ){
+                    return value;
+                }
+            }
+        }
+    }
+
+    
 }
