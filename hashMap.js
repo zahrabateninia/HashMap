@@ -83,5 +83,16 @@ class HashMap{
         }
     }
 
+    // has(key) takes a key as an argument and returns true or false based on whether or not the key is in the hash map.
+    has(checkKey) {
+        for (const innerBucket of this.bucket) {
+            for (const { key } of innerBucket) {
+                if (checkKey === key) {
+                    return true; 
+                }
+            }
+        }
+        return false; // Key not found in any bucket, return false
+    }
     
 }
