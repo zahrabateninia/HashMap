@@ -127,8 +127,29 @@ class HashMap{
     }
 
     // keys() returns an array containing all the keys inside the hash map.
+    keys(){
+        const keys = []
+        for(const innerBucket of this.bucket){
+            for(const {key} of innerBucket){
+                keys.push(key)
+            }
+        }
+        return keys;
+    }
 
     // values() returns an array containing all the values.
+
+    values(){
+        const values = []
+        for(const innerBucket of this.bucket){
+            for(const {value} of innerBucket){
+                keys.push(value)
+            }
+        }
+        return values;
+    }
+
+
 
     // entries() returns an array that contains each key, value pair. Example: [[firstKey, firstValue], [secondKey, secondValue]]
         
