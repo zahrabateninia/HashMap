@@ -152,6 +152,16 @@ class HashMap{
 
 
     // entries() returns an array that contains each key, value pair. Example: [[firstKey, firstValue], [secondKey, secondValue]]
+    entries() {
+        const entries = [];
+        for (const innerBucket of this.bucket) {
+            for (const { key, value } of innerBucket) {
+                entries.push([key, value]);
+            }
+        }
+        return entries;
+    }
+    
         
 }
 
