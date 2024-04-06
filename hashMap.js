@@ -119,13 +119,14 @@ class HashMap{
     }
 
     // clear() removes all entries in the hash map.
-    clear(){
-        this.bucket.forEach((innerBucket) => {
-            innerBucket.length = 0;
+    clear() {
+        // Iterate over each bucket and reset it to an empty array
+        for (let i = 0; i < this.bucket.length; i++) {
+            this.bucket[i] = [];
         }
-        )
+        this.countOfPairs = 0;
     }
-
+    
     // keys() returns an array containing all the keys inside the hash map.
     keys(){
         const keys = []
@@ -143,7 +144,7 @@ class HashMap{
         const values = []
         for(const innerBucket of this.bucket){
             for(const {value} of innerBucket){
-                keys.push(value)
+                values.push(value)
             }
         }
         return values;
@@ -165,3 +166,23 @@ class HashMap{
         
 }
 
+// Test my hash map :)
+
+let myMap = new HashMap();
+myMap.set("Zahra", "Btn")
+myMap.set("Maryam", "Rhm")
+myMap.set("Sina", "Rzi")
+console.log(myMap)
+console.log(myMap.get("Zahra")) // Btn
+console.log(myMap.has("Sin")) // false
+console.log(myMap.remove("Maryam"))
+console.log(myMap.remove("Jack"))
+console.log(myMap.length()) //2
+console.log(myMap.clear())
+console.log(myMap.length()) // 0
+console.log(myMap.has("Maryam")) //false
+myMap.set("Zac", "Efr")
+console.log(myMap)
+console.log(myMap.keys())
+console.log(myMap.values())
+console.log(myMap.entries())
