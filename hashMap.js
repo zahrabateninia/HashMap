@@ -107,6 +107,7 @@ class HashMap{
             let indexOfKey = innerBucket.findIndex((element) => element.key === key)
             // remove the entry
             innerBucket.splice(indexOfKey, 1);
+            this.countOfPairs--;
             return true
         }
   
